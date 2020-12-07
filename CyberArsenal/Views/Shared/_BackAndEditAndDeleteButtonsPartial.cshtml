@@ -1,0 +1,14 @@
+﻿@model int
+
+<div class="row">
+    <div class="pr-2">
+        <a class="btn btn-success" style="width:90px" asp-action="Index"><i class="fas fa-undo"></i> Go Back</a>
+    </div>
+    <div class="pr-2">
+        <a class="btn btn-primary" style="width:90px"
+           asp-action="Upsert" asp-route-id="@Model"><i class="fas fa-pen-fancy"></i><br /> Edit</a>
+    </div>
+    <div>
+        <button class="btn btn-danger" style="width:90px"><i class="fas fa-trash-alt"></i> Delete</button>
+    </div>
+</div>

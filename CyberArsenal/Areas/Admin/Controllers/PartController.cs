@@ -2,21 +2,21 @@
 using CyberArsenal.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CyberArsenal.Areas.Customer.Controllers
+namespace CyberArsenal.Areas.Admin.Controllers
 {
-    [Area("Customer")]
-    public class BuildController : Controller
+    [Area("Admin")]
+    public class PartController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public BuildController(IUnitOfWork unitOfWork)
+        public PartController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? type)
         {
-            var objList = _unitOfWork.Build.GetAll();
+            var objList = _unitOfWork.Part.GetAll();
 
             return View(objList);
         }
@@ -24,14 +24,14 @@ namespace CyberArsenal.Areas.Customer.Controllers
         [HttpGet]
         public IActionResult Upsert(int? id)
         {
-            Build obj = new Build();
+            Part obj = new Part();
 
             if (id == null)
             {
                 return View(obj);
             }
 
-            obj = _unitOfWork.Build.Get(id.GetValueOrDefault());
+            obj = _unitOfWork.Part.Get(id.GetValueOrDefault());
 
             if (obj == null)
             {
@@ -42,31 +42,31 @@ namespace CyberArsenal.Areas.Customer.Controllers
         }
 
         [HttpPost]
-        public IActionResult Upsert(Build build)
+        public IActionResult Upsert(Part part)
         {
             if (ModelState.IsValid)
             {
-                if (build.Id != 0)
+                if (part.Id != 0)
                 {
-                    _unitOfWork.Build.Update(build);
+                    _unitOfWork.Part.Update(part);
                 }
                 else
                 {
-                    _unitOfWork.Build.Add(build);
+                    _unitOfWork.Part.Add(part);
                 }
                 _unitOfWork.Save();
 
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(build);
+            return View(part);
         }
 
         public IActionResult Detail(int id)
         {
-            Build obj;
+            Part obj;
 
-            obj = _unitOfWork.Build.Get(id);
+            obj = _unitOfWork.Part.Get(id);
 
             if (obj == null)
             {
@@ -78,9 +78,9 @@ namespace CyberArsenal.Areas.Customer.Controllers
 
         public IActionResult Compare(int id)
         {
-            Build obj;
+            Part obj;
 
-            obj = _unitOfWork.Build.Get(id);
+            obj = _unitOfWork.Part.Get(id);
 
             if (obj == null)
             {
@@ -93,23 +93,23 @@ namespace CyberArsenal.Areas.Customer.Controllers
         #region API CALLS
         public IActionResult GetAll()
         {
-            var objList = _unitOfWork.Build.GetAll();
+            var objList = _unitOfWork.Part.GetAll();
 
-            return Json(new { data = objList });
+            return Json(new {data = objList});
         }
 
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            var obj = _unitOfWork.Build.Get(id);
+            var obj = _unitOfWork.Part.Get(id);
 
-            if (obj != null)
+            if(obj != null)
             {
-                _unitOfWork.Build.Remove(obj);
+                _unitOfWork.Part.Remove(obj);
                 _unitOfWork.Save();
             }
 
-            return Json(new { success = true });
+            return Json(new {success = true});
         }
 
         #endregion

@@ -1,5 +1,9 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+:root {
+    --my-bg-dark: #2f475e;
+    --my-bg-orange: #ff751a;
+}
 
 a.navbar-brand {
   white-space: normal;
@@ -59,8 +63,9 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    min-width: 100%;
 }
 .footer {
   position: absolute;
@@ -70,10 +75,189 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
-#front-page {
+#logo {
     background-image:
     url(../images/cyber-arsenal-logo.png);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
+}
+
+.my-bg-dark{
+    background-color: var(--my-bg-dark);
+}
+
+.my-bg-orange{
+    background-color: var(--my-bg-orange);
+}
+
+.orange-border {
+    border-top: 1px solid var(--my-bg-orange);
+    border-bottom: 1px solid var(--my-bg-orange);
+}
+
+.images-shadow {
+    box-shadow: rgba(0, 0, 0, .2) 3px 5px 5px;
+}
+
+#logo-picture {
+    background-image: url(../images/cyber-arsenal-logo.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 1px white solid;
+}
+
+.wide-image-text {
+
+    position: relative;
+    margin: 20px auto 20px;
+    height: 300px;
+    width: 100%;
+    display: table;
+}
+
+    .wide-image-text > div {
+        display: table-cell;
+    }
+
+.wide-image {
+    overflow: hidden;
+    height: inherit;
+}
+
+    .wide-image span {
+        display: block;
+        width: 100%;
+        height: inherit;
+    }
+
+.wide-text {
+    height: inherit;
+    border: 1px solid white;
+}
+
+    .wide-text > div {
+        margin: 50px auto;
+    }
+
+.left {
+    float: left;
+    width: 70%;
+}
+
+.right {
+    float: right;
+    width: 30%;
+}
+
+#banner-container {
+    height: calc(100vw / 5);
+    position: relative;
+}
+
+#banner {
+    position: relative;
+    background-image: linear-gradient(rgba(124, 166, 204, 0.4), rgba(124, 166, 204, 0.4)), url(../images/vector-banner.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: inherit;
+}
+
+    #banner h1{
+        color: white;
+    }
+
+    #banner div {
+        position: absolute;
+        top: 40%;
+        left: 40vw;
+        width: 300px;
+        border-radius: 25px;
+        background-color: darkred;
+        text-align: center;
+    }
+
+.icon-container{
+    margin: auto auto;
+    height: 170px;
+    width: 100%;
+    border: 10px solid var(--my-bg-orange);
+    border-radius: 10px;
+    margin: 10px auto;
+    text-align: center;
+    display: flex;
+    justify-content:space-evenly;
+}
+
+.icon {
+    margin: auto auto;
+    border: 2px white solid;
+    background-color: var(--my-bg-dark);
+    border-radius: 10px;
+    display: inline-block;
+}
+
+    .icon i {
+        height: 90px;
+        width: 200px;
+        color: white;
+        transition: color 0.5s;
+    }
+
+    .icon i:hover {
+        color: var(--my-bg-orange);
+    }
+
+.fire img{
+    height: 50px;
+    width: 50px;
+    float: left;
+}
+
+@media only screen and (max-width: 1024px) {
+    .wide-image-text > div {
+        width: 100%;
+        height: 200px;
+    }
+
+    .wide-text > div {
+        margin: 10px auto;
+    }
+
+    .icon-container {
+        height: calc(100vw / 3);
+    }
+
+    .icon i{
+        width: 90px;
+        height: 80px;
+    }
+
+    #banner div {
+        width: 70%;
+        left: 15vw;
+        top: 40%;
+    }
+}
+
+.dataTables_length {
+    color: white !important;
+}
+
+.dataTables_filter {
+    color: white !important;
+}
+
+.dataTables_info {
+    color: white !important;
+}
+
+.dataTables_paginate {
+    color: white !important;
+}
+
+table.dataTable tbody tr{
+    background-color: var(--my-bg-dark);
 }

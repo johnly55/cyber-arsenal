@@ -1,66 +1,55 @@
 ﻿@model IEnumerable<Build>
-@{ 
+@{
     ViewData["Title"] = "My Builds";
 }
-<div>
-    <a class="btn btn-primary mt-1 mb-4" asp-action="Upsert"><i class="fas fa-plus-square"> Create Build</i></a>
-</div>
-<div>
-    <table class="table table-striped col-12" style="border:1px solid black">
-        <thead class="bg-primary">
-            <tr>
-                <th class="col-2">
-                    <label asp-for="@Model.FirstOrDefault().Name"></label>
-                </th>
-                <th class="col-2">
-                    <label asp-for="@Model.FirstOrDefault().Cpu"></label>
-                </th>
-                <th class="col-2">
-                    <label asp-for="@Model.FirstOrDefault().Gpu"></label>
-                </th>
-                <th class="col-2">
-                    <label asp-for="@Model.FirstOrDefault().Ram"></label>
-                </th>
-                <th class="col-2">
-                    <label asp-for="@Model.FirstOrDefault().Storage"></label>
-                <th class="col-2"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model.Count() > 0)
-            {
-                foreach (var build in Model)
-                {
-                    <tr>
-                        <td>
-                            <a class="btn btn-outline-primary" style="border-radius:5px; ">
-                            <i class="fas fa-info-circle"> @build.Name</i>
-                            </a>
-                        </td>
-                        <td>
-                            @build.Cpu
-                        </td>
-                        <td>
-                            @build.Gpu
-                        </td>
-                        <td>
-                            @build.Ram
-                        </td>
-                        <td>
-                            @build.Storage
-                        </td>
-                        <td>
-                            <partial name="_EditAndDeletePartial" model="build.Id" />
-                        </td>
-                    </tr>
-                }
-            }
-            else
-            {
+<div style="margin:20px 30px">
+    <a style="float:left" class="btn btn-primary mt-1 mb-4" asp-action="Upsert"><i class="fas fa-plus-square"> Create a Build</i></a>
+    <h1 style="text-align:center">Build List</h1>
+    <div class="my-bg-dark">
+        <table id="myTable" class="table table-striped col-12">
+            <thead class="bg-primary">
                 <tr>
-                    <td colspan="12"><strong>You currently have no builds</strong></td>
+                    <th class="all">
+                        <label asp-for="@Model.FirstOrDefault().Name"></label>
+                    </th>
+                    <th class="desktop">
+                        <label asp-for="@Model.FirstOrDefault().Cpu"></label>
+                    </th>
+                    <th class="desktop">
+                        <label asp-for="@Model.FirstOrDefault().Gpu"></label>
+                    </th>
+                    <th class="desktop">
+                        <label asp-for="@Model.FirstOrDefault().Ram"></label>
+                    </th>
+                    <th class="desktop">
+                        <label asp-for="@Model.FirstOrDefault().Storage"></label>
+                    </th>
+                    <th class="none">
+                        <label asp-for="@Model.FirstOrDefault().StorageSecondary"></label>
+                    </th>
+                    <th class="none">
+                        <label asp-for="@Model.FirstOrDefault().MotherBoard"></label>
+                    </th>
+                    <th class="none">
+                        <label asp-for="@Model.FirstOrDefault().PowerSupply"></label>
+                    </th>
+                    <th class="none">
+                        <label asp-for="@Model.FirstOrDefault().Case"></label>
+                    </th>
+                    <th class="none">
+                        <label asp-for="@Model.FirstOrDefault().Description"></label>
+                    </th>
+                    <th class="none"></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+    </div>
 </div>
+
+@section Scripts
+{
+    <script src="~/js/build.js"></script>
+}

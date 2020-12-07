@@ -1,6 +1,103 @@
-﻿@{ 
+﻿@model IEnumerable<Build>
+@{
     ViewData["Title"] = "Home Page";
 }
-<div>
-    <h1>Welcome To the page</h1>
+
+<div id="banner-container">
+    <div id="banner">
+        <div>
+            <h1>Build. Test. Compare.</h1>
+        </div>
+    </div>
 </div>
+
+<div style="margin:20px auto;border-radius:10px;width:95%;height:100%" class=" my-bg-dark">
+    <h1 style="text-align:center;">Compare Different PC Parts</h1>
+    <div class="icon-container">
+        <div class="icon">
+            <a href="#">
+                <i class="fas fa-microchip fa-5x"></i>
+            </a>
+            <h3>CPU</h3>
+        </div><div class="icon">
+            <a href="#">
+                <i class="fas fa-gamepad fa-5x"></i>
+            </a>
+            <h3>GPU</h3>
+        </div>
+        <div class="icon">
+            <a href="#">
+                <i class="fas fa-memory fa-5x"></i>
+            </a>
+            <h3>RAM</h3>
+        </div>
+        <div class="icon">
+            <a href="#">
+                <i class="fas fa-hdd fa-5x"></i>
+            </a>
+            <h3>SSD/HDD</h3>
+        </div>
+    </div>
+</div>
+
+<div class="wide-image-text my-bg-dark" style="margin-bottom:50px">
+    <div class="wide-text left">
+        <div style="text-align:center">
+            <h1 class="text-danger" style="border-bottom:2px solid white">Build Your Arsenal</h1>
+            <ul>
+                <li>
+                    Add components to your pc build to store for information
+                    or compare your builds to others and see how you stack
+                </li>
+            </ul>
+            <a class="btn btn-outline-danger" style="border-radius:10px" asp-controller="Build" asp-action="Upsert">
+                <h1>Start</h1>
+            </a>
+        </div>
+    </div>
+    <div class="wide-image right">
+        <span id="logo-picture" class="images-shadow"></span>
+    </div>
+</div>
+
+<div style="margin:20px 30px">
+    <div style="margin:auto auto;width:360px">
+        <div class="fire">
+            <img src="~/images/fire.gif" />
+        </div>
+        <h1 style="float:left">Newest Builds</h1>
+        <div class="fire">
+            <img src="~/images/fire.gif" />
+        </div>
+    </div>
+    <div class="my-bg-dark">
+        <table id="myTable" class="table table-striped col-12">
+            <thead class="bg-primary">
+                <tr>
+                    <th class="all">
+                        <label asp-for="@Model.FirstOrDefault().Name"></label>
+                    </th>
+                    <th class="desktop">
+                        <label asp-for="@Model.FirstOrDefault().Cpu"></label>
+                    </th>
+                    <th class="desktop">
+                        <label asp-for="@Model.FirstOrDefault().Gpu"></label>
+                    </th>
+                    <th class="desktop">
+                        <label asp-for="@Model.FirstOrDefault().Ram"></label>
+                    </th>
+                    <th class="desktop">
+                        <label asp-for="@Model.FirstOrDefault().Storage"></label>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/showcaseBuild.js"></script>
+}

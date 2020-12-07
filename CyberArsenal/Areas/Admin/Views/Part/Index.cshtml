@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Part>
+@{
+    ViewData["Title"] = "Parts";
+}
+<div style="margin:20px 30px">
+    <a style="float:left" class="btn btn-primary mt-1 mb-4" asp-action="Upsert"><i class="fas fa-plus-square"> Create a Part</i></a>
+    <h1 style="text-align:center">Parts List</h1>
+    <div class="my-bg-dark">
+        <table id="myTable" class="table table-striped col-12">
+            <thead class="bg-primary">
+                <tr>
+                    <th class="all">
+                        <label asp-for="@Model.FirstOrDefault().Type"></label>
+                    </th>
+                    <th class="all">
+                        <label asp-for="@Model.FirstOrDefault().Name"></label>
+                    </th>
+                    <th class="desktop">
+                        <label asp-for="@Model.FirstOrDefault().Benchmark"></label>
+                    </th>
+                    <th class="desktop">
+                        <label asp-for="@Model.FirstOrDefault().Score"></label>
+                    </th>
+                    <th class="desktop">
+                        <label asp-for="@Model.FirstOrDefault().Price"></label>
+                    </th>
+                    <th class="desktop">
+                        <label asp-for="@Model.FirstOrDefault().ReleaseDate"></label>
+                    </th>
+                    <th class="none"></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/part.js"></script>
+}

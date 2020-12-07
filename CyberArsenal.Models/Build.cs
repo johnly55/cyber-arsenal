@@ -56,3 +56,14 @@ namespace CyberArsenal.Models
         public string Description { get; set; }
     }
 }
+/*
+TODO:
+ADD:
+    User
+    Date created
+    Private
+    Score
+    Droplist for all components
+CHANGE:
+    Description max size from 500 to 200
+ */

@@ -1,0 +1,49 @@
+﻿@model Build
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="p-4 bg-dark">
+    <div class="form-group">
+        <label asp-for="@Model.Name"></label>
+        <input class="form-control" asp-for="@Model.Name" type="text" disabled />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Cpu"></label>
+        <input class="form-control" asp-for="@Model.Cpu" type="text" disabled />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Gpu"></label>
+        <input class="form-control" asp-for="@Model.Gpu" type="text" disabled />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Ram"></label>
+        <input class="form-control" asp-for="@Model.Ram" type="text" disabled />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Storage"></label>
+        <input class="form-control" asp-for="@Model.Storage" type="text" disabled />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.StorageSecondary"></label>
+        <input class="form-control" asp-for="@Model.StorageSecondary" type="text" disabled />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.MotherBoard"></label>
+        <input class="form-control" asp-for="@Model.MotherBoard" type="text" disabled />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.PowerSupply"></label>
+        <input class="form-control" asp-for="@Model.PowerSupply" type="text" disabled />
+        <span class="text-danger" asp-validation-for="@Model.PowerSupply"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Case"></label>
+        <input class="form-control" asp-for="@Model.Case" type="text" disabled />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Description"></label>
+        <textarea class="form-control" asp-for="@Model.Description" disabled></textarea>
+    </div>
+    <div>
+    </div>
+</div>

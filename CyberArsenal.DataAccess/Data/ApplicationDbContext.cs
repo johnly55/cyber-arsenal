@@ -12,5 +12,7 @@ namespace CyberArsenal.DataAccess.Data
         }
 
         public DbSet<Build> Builds { get; set; }
+
+        public DbSet<Part> Parts { get; set; }
     }
 }

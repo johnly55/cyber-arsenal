@@ -6,13 +6,8 @@ using System.Text;
 
 namespace CyberArsenal.DataAccess.Repository.IRepository
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IPartRepository : IRepository<Part>
     {
-
-        public IBuildRepository Build { get; }
-
-        public IPartRepository Part { get; }
-
-        public void Save();
+        public void Update(Part part);
     }
 }
