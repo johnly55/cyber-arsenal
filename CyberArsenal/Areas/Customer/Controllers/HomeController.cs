@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CyberArsenal.Models;
 using CyberArsenal.DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CyberArsenal.Areas.Customer
 {
+    [AllowAnonymous]
     [Area("Customer")]
     public class HomeController : Controller
     {
@@ -39,5 +41,14 @@ namespace CyberArsenal.Areas.Customer
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        #region API CALLS
+        public IActionResult GetBuilds()
+        {
+            var objList = _unitOfWork.Build.GetAll();
+
+            return Json(new { data = objList });
+        }
+        #endregion
     }
 }

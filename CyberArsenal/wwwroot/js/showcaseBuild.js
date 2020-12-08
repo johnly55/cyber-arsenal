@@ -2,7 +2,7 @@
 $(document).ready(function () {
     table = $('#myTable').DataTable({
         responsive: true,
-        ajax: '/Customer/Build/GetAll',
+        ajax: '/Customer/Home/GetBuilds',
         columns: [
             { 'data': 'name' },
             { 'data': 'cpu' },

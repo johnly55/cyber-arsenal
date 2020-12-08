@@ -1,9 +1,12 @@
 ﻿using CyberArsenal.DataAccess.Repository.IRepository;
 using CyberArsenal.Models;
+using CyberArsenal.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CyberArsenal.Areas.Admin.Controllers
 {
+    [Authorize(Roles = SD.ROLE_ADMIN + "," + SD.ROLE_MOD)]
     [Area("Admin")]
     public class PartController : Controller
     {
@@ -42,6 +45,7 @@ namespace CyberArsenal.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Upsert(Part part)
         {
             if (ModelState.IsValid)

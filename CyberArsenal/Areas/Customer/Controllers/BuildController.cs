@@ -1,9 +1,11 @@
 ﻿using CyberArsenal.DataAccess.Repository.IRepository;
 using CyberArsenal.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CyberArsenal.Areas.Customer.Controllers
 {
+    [Authorize]
     [Area("Customer")]
     public class BuildController : Controller
     {
@@ -42,6 +44,7 @@ namespace CyberArsenal.Areas.Customer.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Upsert(Build build)
         {
             if (ModelState.IsValid)

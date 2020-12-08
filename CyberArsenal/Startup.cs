@@ -27,13 +27,27 @@ namespace CyberArsenal
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
+
+            services.AddAuthentication().AddFacebook(options =>
+            {
+                options.AppId = "131160758622724";
+                options.AppSecret = "e5f1b1923f1a3b506584e7df375084cd";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
