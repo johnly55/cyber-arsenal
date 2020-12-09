@@ -15,24 +15,24 @@
     <h1 style="text-align:center;">Compare Different PC Parts</h1>
     <div class="icon-container">
         <div class="icon">
-            <a href="#">
+            <a asp-area="Customer" asp-controller="Part" asp-action="Cpu">
                 <i class="fas fa-microchip fa-5x"></i>
             </a>
             <h3>CPU</h3>
         </div><div class="icon">
-            <a href="#">
+            <a asp-area="Customer" asp-controller="Part" asp-action="Gpu">
                 <i class="fas fa-gamepad fa-5x"></i>
             </a>
             <h3>GPU</h3>
         </div>
         <div class="icon">
-            <a href="#">
+            <a asp-area="Customer" asp-controller="Part" asp-action="Ram">
                 <i class="fas fa-memory fa-5x"></i>
             </a>
             <h3>RAM</h3>
         </div>
         <div class="icon">
-            <a href="#">
+            <a asp-area="Customer" asp-controller="Part" asp-action="Storage">
                 <i class="fas fa-hdd fa-5x"></i>
             </a>
             <h3>SSD/HDD</h3>
@@ -75,19 +75,19 @@
             <thead class="bg-primary">
                 <tr>
                     <th class="all">
-                        <label asp-for="@Model.FirstOrDefault().Name"></label>
+                        <label asp-for="@Model.FirstOrDefault().ApplicationUser.UserName">User</label>
                     </th>
                     <th class="desktop">
-                        <label asp-for="@Model.FirstOrDefault().Cpu"></label>
+                        <label asp-for="@Model.FirstOrDefault().CpuName"></label>
                     </th>
                     <th class="desktop">
-                        <label asp-for="@Model.FirstOrDefault().Gpu"></label>
+                        <label asp-for="@Model.FirstOrDefault().GpuName"></label>
                     </th>
                     <th class="desktop">
-                        <label asp-for="@Model.FirstOrDefault().Ram"></label>
+                        <label asp-for="@Model.FirstOrDefault().RamName"></label>
                     </th>
                     <th class="desktop">
-                        <label asp-for="@Model.FirstOrDefault().Storage"></label>
+                        <label asp-for="@Model.FirstOrDefault().StorageName"></label>
                     </th>
                 </tr>
             </thead>

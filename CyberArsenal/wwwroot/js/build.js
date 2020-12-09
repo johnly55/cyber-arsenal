@@ -5,15 +5,14 @@ $(document).ready(function () {
         ajax: '/Customer/Build/GetAll',
         columns: [
             { 'data': 'name' },
-            { 'data': 'cpu' },
-            { 'data': 'gpu' },
-            { 'data': 'ram' },
-            { 'data': 'storage' },
+            { 'data': 'cpuName' },
+            { 'data': 'gpuName' },
+            { 'data': 'ramName' },
+            { 'data': 'storageName' },
             { 'data': 'storageSecondary' },
             { 'data': 'motherBoard' },
             { 'data': 'powerSupply' },
             { 'data': 'case' },
-            { 'data': 'description' },
             {
                 'data': 'id',
                 'render': function (data) {
@@ -53,12 +52,22 @@ function Delete(id) {
                 url: "/Customer/Build/Delete",
                 data: { id: id },
                 success: function (data) {
-                    table.ajax.reload();
-                    Swal.fire(
-                        'Deleted!',
-                        'Object successfully deleted.',
-                        'success'
-                    )
+                    if (data.success) {
+                        table.ajax.reload();
+                        Swal.fire(
+                            'Deleted!',
+                            'Object successfully deleted.',
+                            'success'
+                        )
+                    }
+                    else {
+                        table.ajax.reload();
+                        Swal.fire(
+                            'Not Athorized!',
+                            'Delete aborted.',
+                            'error'
+                        )
+                    }
                 }
             });
         }

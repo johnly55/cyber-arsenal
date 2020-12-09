@@ -4,14 +4,16 @@ using CyberArsenal.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CyberArsenal.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201209000918_ChangeBuildAddComponentForeginKeys")]
+    partial class ChangeBuildAddComponentForeginKeys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,10 +27,6 @@ namespace CyberArsenal.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Case")
                         .HasColumnType("nvarchar(40)")
@@ -97,8 +95,6 @@ namespace CyberArsenal.DataAccess.Migrations
                         .HasMaxLength(40);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("CpuId");
 
@@ -355,12 +351,6 @@ namespace CyberArsenal.DataAccess.Migrations
 
             modelBuilder.Entity("CyberArsenal.Models.Build", b =>
                 {
-                    b.HasOne("CyberArsenal.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("CyberArsenal.Models.Part", "Cpu")
                         .WithMany()
                         .HasForeignKey("CpuId");

@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using CyberArsenal.Models;
 using CyberArsenal.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -127,7 +128,7 @@ namespace CyberArsenal.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser 
+                var user = new ApplicationUser 
                 { 
                     UserName = Input.UserName, 
                     Email = Input.Email 

@@ -2,6 +2,7 @@
 using CyberArsenal.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 
 namespace CyberArsenal.Areas.Customer.Controllers
 {
@@ -10,23 +11,30 @@ namespace CyberArsenal.Areas.Customer.Controllers
     public class BuildController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public BuildController(IUnitOfWork unitOfWork)
+        public BuildController(
+            IUnitOfWork unitOfWork, 
+            UserManager<IdentityUser> userManager)
         {
             _unitOfWork = unitOfWork;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
         {
-            var objList = _unitOfWork.Build.GetAll();
+            var obj = new Build(); 
 
-            return View(objList);
+            return View(obj);
         }
 
         [HttpGet]
         public IActionResult Upsert(int? id)
         {
-            Build obj = new Build();
+            Build obj = new Build
+            {
+                ApplicationUserId = _userManager.GetUserId(User)
+            };
 
             if (id == null)
             {
@@ -38,6 +46,12 @@ namespace CyberArsenal.Areas.Customer.Controllers
             if (obj == null)
             {
                 return NotFound();
+            }
+
+            //If user besides creator tries to edit, redirect
+            if(obj.ApplicationUserId != _userManager.GetUserId(User))
+            {
+                return RedirectToAction(nameof(Index));
             }
 
             return View(obj);
@@ -96,7 +110,11 @@ namespace CyberArsenal.Areas.Customer.Controllers
         #region API CALLS
         public IActionResult GetAll()
         {
-            var objList = _unitOfWork.Build.GetAll();
+            var objList = _unitOfWork.Build.GetAll
+                (
+                    u => u.ApplicationUserId == _userManager.GetUserId(User),
+                    "Cpu,Gpu,Ram,Storage"
+                );
 
             return Json(new { data = objList });
         }
@@ -106,13 +124,21 @@ namespace CyberArsenal.Areas.Customer.Controllers
         {
             var obj = _unitOfWork.Build.Get(id);
 
-            if (obj != null)
+            if (obj.ApplicationUserId == _userManager.GetUserId(User))
             {
-                _unitOfWork.Build.Remove(obj);
-                _unitOfWork.Save();
-            }
 
-            return Json(new { success = true });
+                if (obj != null)
+                {
+                    _unitOfWork.Build.Remove(obj);
+                    _unitOfWork.Save();
+                }
+
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false });
+            }
         }
 
         #endregion

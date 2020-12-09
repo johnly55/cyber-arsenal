@@ -3,6 +3,7 @@ using CyberArsenal.Models;
 using CyberArsenal.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CyberArsenal.Areas.Admin.Controllers
 {
@@ -17,11 +18,10 @@ namespace CyberArsenal.Areas.Admin.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index(int? type)
+        public IActionResult Index()
         {
-            var objList = _unitOfWork.Part.GetAll();
-
-            return View(objList);
+            var obj = new Part();
+            return View(obj);
         }
 
         [HttpGet]
@@ -95,7 +95,8 @@ namespace CyberArsenal.Areas.Admin.Controllers
         }
 
         #region API CALLS
-        public IActionResult GetAll()
+
+        public IActionResult GetAll(int partType)
         {
             var objList = _unitOfWork.Part.GetAll();
 

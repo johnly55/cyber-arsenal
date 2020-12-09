@@ -8,6 +8,8 @@ using Microsoft.Extensions.Logging;
 using CyberArsenal.Models;
 using CyberArsenal.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Authorization;
+using CyberArsenal.DataAccess.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace CyberArsenal.Areas.Customer
 {
@@ -45,8 +47,7 @@ namespace CyberArsenal.Areas.Customer
         #region API CALLS
         public IActionResult GetBuilds()
         {
-            var objList = _unitOfWork.Build.GetAll();
-
+            var objList = _unitOfWork.Build.GetAll(u => u.Private == false, "ApplicationUser,Cpu,Gpu,Ram,Storage");
             return Json(new { data = objList });
         }
         #endregion

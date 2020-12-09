@@ -4,11 +4,11 @@ $(document).ready(function () {
         responsive: true,
         ajax: '/Customer/Home/GetBuilds',
         columns: [
-            { 'data': 'name' },
-            { 'data': 'cpu' },
-            { 'data': 'gpu' },
-            { 'data': 'ram' },
-            { 'data': 'storage' }
+            { 'data': 'applicationUser.userName' },
+            { 'data': 'cpuName' },
+            { 'data': 'gpuName' },
+            { 'data': 'ramName' },
+            { 'data': 'storageName' }
         ]
     });
 });

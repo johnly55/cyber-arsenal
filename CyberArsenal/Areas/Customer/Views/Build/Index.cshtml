@@ -1,8 +1,8 @@
-﻿@model IEnumerable<Build>
+﻿@model Build
 @{
     ViewData["Title"] = "My Builds";
 }
-<div style="margin:20px 30px">
+<div style="margin:20px 30px;">
     <a style="float:left" class="btn btn-primary mt-1 mb-4" asp-action="Upsert"><i class="fas fa-plus-square"> Create a Build</i></a>
     <h1 style="text-align:center">Build List</h1>
     <div class="my-bg-dark">
@@ -10,34 +10,31 @@
             <thead class="bg-primary">
                 <tr>
                     <th class="all">
-                        <label asp-for="@Model.FirstOrDefault().Name"></label>
+                        <label asp-for="@Model.Name"></label>
                     </th>
                     <th class="desktop">
-                        <label asp-for="@Model.FirstOrDefault().Cpu"></label>
+                        <label asp-for="@Model.CpuName"></label>
                     </th>
                     <th class="desktop">
-                        <label asp-for="@Model.FirstOrDefault().Gpu"></label>
+                        <label asp-for="@Model.GpuName"></label>
                     </th>
                     <th class="desktop">
-                        <label asp-for="@Model.FirstOrDefault().Ram"></label>
+                        <label asp-for="@Model.RamName"></label>
                     </th>
                     <th class="desktop">
-                        <label asp-for="@Model.FirstOrDefault().Storage"></label>
+                        <label asp-for="@Model.StorageName"></label>
                     </th>
                     <th class="none">
-                        <label asp-for="@Model.FirstOrDefault().StorageSecondary"></label>
+                        <label asp-for="@Model.StorageSecondary"></label>
                     </th>
                     <th class="none">
-                        <label asp-for="@Model.FirstOrDefault().MotherBoard"></label>
+                        <label asp-for="@Model.MotherBoard"></label>
                     </th>
                     <th class="none">
-                        <label asp-for="@Model.FirstOrDefault().PowerSupply"></label>
+                        <label asp-for="@Model.PowerSupply"></label>
                     </th>
                     <th class="none">
-                        <label asp-for="@Model.FirstOrDefault().Case"></label>
-                    </th>
-                    <th class="none">
-                        <label asp-for="@Model.FirstOrDefault().Description"></label>
+                        <label asp-for="@Model.Case"></label>
                     </th>
                     <th class="none"></th>
                 </tr>

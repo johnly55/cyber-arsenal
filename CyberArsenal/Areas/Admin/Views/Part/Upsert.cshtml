@@ -2,7 +2,7 @@
 @{ 
     string upsert = "Create";
 }
-<div class="p-4 bg-dark">
+<div class="p-4 bg-dark col-6" style="margin: auto auto">
     <div>
         <form method="post">
             <div asp-validation-summary="ModelOnly"></div>
@@ -19,13 +19,22 @@
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Type"></label>
-                <input class="form-control" asp-for="@Model.Type" type="text" />
-                <span class="text-danger" asp-validation-for="@Model.Type"></span>
+                    @Html.DropDownListFor(u => u.Type, 
+                    new SelectList(new string[] {
+                        "Cpu", "Gpu", "Ram", "Storage" 
+                    }),
+                    "-Select component type", new { @class="form-control" })
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Benchmark"></label>
-                <input class="form-control" asp-for="@Model.Benchmark" type="text" />
-                <span class="text-danger" asp-validation-for="@Model.Benchmark"></span>
+                @Html.DropDownListFor(u => u.Benchmark,
+                    new SelectList(new string[]
+                    {
+                        "PassMark",
+                        "Other"
+
+                    }),
+                    "-Select Benchmark", new { @class = "form-control" })
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Score"></label>
@@ -41,6 +50,7 @@
                 <label asp-for="@Model.ReleaseDate"></label>
                 <input class="form-control" asp-for="@Model.ReleaseDate" type="date" />
                 <span class="text-danger" asp-validation-for="@Model.ReleaseDate"></span>
+                <span class="text-white">Enter 01/01/0001 if Unknown</span>
             </div>
             <div class="form-group row">
                 <partial name="_BackButtonPartial" />

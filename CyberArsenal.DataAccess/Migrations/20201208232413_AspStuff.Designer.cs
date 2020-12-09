@@ -4,14 +4,16 @@ using CyberArsenal.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CyberArsenal.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201208232413_AspStuff")]
+    partial class AspStuff
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,33 +28,20 @@ namespace CyberArsenal.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Case")
                         .HasColumnType("nvarchar(40)")
                         .HasMaxLength(40);
 
-                    b.Property<int?>("CpuId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CpuName")
+                    b.Property<string>("Cpu")
                         .IsRequired()
                         .HasColumnType("nvarchar(40)")
                         .HasMaxLength(40);
-
-                    b.Property<string>("Date")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
-                    b.Property<int?>("GpuId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("GpuName")
+                    b.Property<string>("Gpu")
                         .IsRequired()
                         .HasColumnType("nvarchar(40)")
                         .HasMaxLength(40);
@@ -70,24 +59,12 @@ namespace CyberArsenal.DataAccess.Migrations
                         .HasColumnType("nvarchar(40)")
                         .HasMaxLength(40);
 
-                    b.Property<bool>("Private")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("RamId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RamName")
+                    b.Property<string>("Ram")
                         .IsRequired()
                         .HasColumnType("nvarchar(40)")
                         .HasMaxLength(40);
 
-                    b.Property<int>("Score")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("StorageId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("StorageName")
+                    b.Property<string>("Storage")
                         .IsRequired()
                         .HasColumnType("nvarchar(40)")
                         .HasMaxLength(40);
@@ -97,16 +74,6 @@ namespace CyberArsenal.DataAccess.Migrations
                         .HasMaxLength(40);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("CpuId");
-
-                    b.HasIndex("GpuId");
-
-                    b.HasIndex("RamId");
-
-                    b.HasIndex("StorageId");
 
                     b.ToTable("Builds");
                 });
@@ -207,10 +174,6 @@ namespace CyberArsenal.DataAccess.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -262,8 +225,6 @@ namespace CyberArsenal.DataAccess.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -344,38 +305,6 @@ namespace CyberArsenal.DataAccess.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("CyberArsenal.Models.ApplicationUser", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.HasDiscriminator().HasValue("ApplicationUser");
-                });
-
-            modelBuilder.Entity("CyberArsenal.Models.Build", b =>
-                {
-                    b.HasOne("CyberArsenal.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CyberArsenal.Models.Part", "Cpu")
-                        .WithMany()
-                        .HasForeignKey("CpuId");
-
-                    b.HasOne("CyberArsenal.Models.Part", "Gpu")
-                        .WithMany()
-                        .HasForeignKey("GpuId");
-
-                    b.HasOne("CyberArsenal.Models.Part", "Ram")
-                        .WithMany()
-                        .HasForeignKey("RamId");
-
-                    b.HasOne("CyberArsenal.Models.Part", "Storage")
-                        .WithMany()
-                        .HasForeignKey("StorageId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

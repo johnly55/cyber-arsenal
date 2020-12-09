@@ -2,7 +2,7 @@
 @{ 
     string upsert = "Create";
 }
-<div class="p-4 bg-dark">
+<div class="p-4 bg-dark col-6" style="margin: auto auto">
     <div>
         <form method="post">
             <div asp-validation-summary="ModelOnly"></div>
@@ -13,29 +13,32 @@
                 ViewData["Title"] = upsert;
             }
             <div class="form-group">
+                <input class="form-control" asp-for="@Model.ApplicationUserId" type="hidden" />
+            </div>
+            <div class="form-group">
                 <label asp-for="@Model.Name"></label>
                 <input class="form-control" asp-for="@Model.Name" type="text" />
                 <span class="text-danger" asp-validation-for="@Model.Name"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Cpu"></label>
-                <input class="form-control" asp-for="@Model.Cpu" type="text" />
-                <span class="text-danger" asp-validation-for="@Model.Cpu"></span>
+                <label asp-for="@Model.CpuName"></label>
+                <input class="form-control" asp-for="@Model.CpuName" type="text" />
+                <span class="text-danger" asp-validation-for="@Model.CpuName"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Gpu"></label>
-                <input class="form-control" asp-for="@Model.Gpu" type="text" />
-                <span class="text-danger" asp-validation-for="@Model.Gpu"></span>
+                <label asp-for="@Model.GpuName"></label>
+                <input class="form-control" asp-for="@Model.GpuName" type="text" />
+                <span class="text-danger" asp-validation-for="@Model.GpuName"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Ram"></label>
-                <input class="form-control" asp-for="@Model.Ram" type="text" />
-                <span class="text-danger" asp-validation-for="@Model.Ram"></span>
+                <label asp-for="@Model.RamName"></label>
+                <input class="form-control" asp-for="@Model.RamName" type="text" />
+                <span class="text-danger" asp-validation-for="@Model.RamName"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Storage"></label>
-                <input class="form-control" asp-for="@Model.Storage" type="text" />
-                <span class="text-danger" asp-validation-for="@Model.Storage"></span>
+                <label asp-for="@Model.StorageName"></label>
+                <input class="form-control" asp-for="@Model.StorageName" type="text" />
+                <span class="text-danger" asp-validation-for="@Model.StorageName"></span>
             </div>
             <div class="form-group">
                 <label asp-for="@Model.StorageSecondary"></label>
@@ -61,6 +64,11 @@
                 <label asp-for="@Model.Description"></label>
                 <textarea class="form-control" asp-for="@Model.Description"></textarea>
                 <span class="text-danger" asp-validation-for="@Model.Description"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Private"></label>
+                <input class="" asp-for="@Model.Private" type="checkbox" />
+                <span class="text-danger" asp-validation-for="@Model.Private"></span>
             </div>
             <div class="form-group row">
                 <partial name="_BackButtonPartial" />

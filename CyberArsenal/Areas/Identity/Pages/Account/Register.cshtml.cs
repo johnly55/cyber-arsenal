@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using CyberArsenal.DataAccess.Repository.IRepository;
+using CyberArsenal.Models;
 using CyberArsenal.Utilities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -88,7 +89,7 @@ namespace CyberArsenal.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser 
+                var user = new ApplicationUser 
                 {
                     UserName = Input.UserName, 
                     Email = Input.Email 

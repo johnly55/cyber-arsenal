@@ -1,24 +1,20 @@
 ﻿@model Part
 @{
-    ViewData["Title"] = "Parts";
+    ViewData["Title"] = "Gpu";
 }
 <div style="margin:20px 30px">
-    <a style="float:left" class="btn btn-primary mt-1 mb-4" asp-action="Upsert"><i class="fas fa-plus-square"> Create a Part</i></a>
-    <h1 style="text-align:center">Parts List</h1>
+    <h1 style="text-align:center">Gpu List</h1>
     <div class="my-bg-dark">
         <table id="myTable" class="table table-striped col-12">
             <thead class="bg-primary">
                 <tr>
-                    <th class="all">
-                        <label asp-for="@Model.Type"></label>
-                    </th>
                     <th class="all">
                         <label asp-for="@Model.Name"></label>
                     </th>
                     <th class="desktop">
                         <label asp-for="@Model.Benchmark"></label>
                     </th>
-                    <th class="desktop">
+                    <th class="all">
                         <label asp-for="@Model.Score"></label>
                     </th>
                     <th class="desktop">
@@ -27,7 +23,6 @@
                     <th class="desktop">
                         <label asp-for="@Model.ReleaseDate"></label>
                     </th>
-                    <th class="none"></th>
                 </tr>
             </thead>
             <tbody>
@@ -38,5 +33,5 @@
 
 @section Scripts
 {
-    <script src="~/js/part.js"></script>
+    <script src="~/js/showcaseGpu.js"></script>
 }
