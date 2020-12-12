@@ -87,5 +87,7 @@ namespace CyberArsenal.Models
         [Required]
         [Display(Name = "Make Private?")]
         public bool Private { get; set; }
+
+        //prop Authorized
     }
 }

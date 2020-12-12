@@ -23,7 +23,7 @@ namespace CyberArsenal.DataAccess.Repository
                 obj.CpuId = build.CpuId;
                 obj.GpuId = build.GpuId;
                 obj.RamId = build.RamId;
-                obj.Storage = build.Storage;
+                obj.StorageId = build.StorageId;
                 obj.CpuName = build.CpuName;
                 obj.GpuName = build.GpuName;
                 obj.RamName = build.RamName;

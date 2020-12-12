@@ -15,24 +15,24 @@
     <h1 style="text-align:center;">Compare Different PC Parts</h1>
     <div class="icon-container">
         <div class="icon">
-            <a asp-area="Customer" asp-controller="Part" asp-action="Cpu">
+            <a asp-area="Customer" asp-controller="Build" asp-action="Cpu">
                 <i class="fas fa-microchip fa-5x"></i>
             </a>
             <h3>CPU</h3>
         </div><div class="icon">
-            <a asp-area="Customer" asp-controller="Part" asp-action="Gpu">
+            <a asp-area="Customer" asp-controller="Build" asp-action="Gpu">
                 <i class="fas fa-gamepad fa-5x"></i>
             </a>
             <h3>GPU</h3>
         </div>
         <div class="icon">
-            <a asp-area="Customer" asp-controller="Part" asp-action="Ram">
+            <a asp-area="Customer" asp-controller="Build" asp-action="Ram">
                 <i class="fas fa-memory fa-5x"></i>
             </a>
             <h3>RAM</h3>
         </div>
         <div class="icon">
-            <a asp-area="Customer" asp-controller="Part" asp-action="Storage">
+            <a asp-area="Customer" asp-controller="Build" asp-action="Storage">
                 <i class="fas fa-hdd fa-5x"></i>
             </a>
             <h3>SSD/HDD</h3>
@@ -50,7 +50,7 @@
                     or compare your builds to others and see how you stack
                 </li>
             </ul>
-            <a class="btn btn-outline-danger" style="border-radius:10px" asp-controller="Build" asp-action="Upsert">
+            <a class="btn btn-outline-danger" style="border-radius:10px" asp-controller="Build" asp-action="Index">
                 <h1>Start</h1>
             </a>
         </div>

@@ -25,7 +25,9 @@ namespace CyberArsenal
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("AzureConnection")));
+                    Configuration.GetConnectionString("AzureConnection")
+                    //Configuration.GetConnectionString("DefaultConnection")
+                    ));
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

@@ -1,0 +1,96 @@
+﻿@model BuildViewModel
+@{
+    ViewData["Title"] = "Cpu";
+}
+<div style="margin:20px 30px">
+    <input asp-for="CpuId" type="hidden" />
+    <input asp-for="GpuId" type="hidden" />
+    <input asp-for="RamId" type="hidden" />
+    <input asp-for="StorageId" type="hidden" />
+    @if (Model != null && Model?.Page != 0)
+    {
+        <h2 style="text-align:center">
+            Add a processor
+            <a class="btn btn-info" style="border-radius:20px" 
+               asp-action="Upsert" asp-route-id="0" asp-route-cpuId="@Model.CpuId" asp-route-gpuId="@Model.GpuId" 
+               asp-route-ramId="@Model.RamId" asp-route-storageId="@Model.StorageId">Or customize your own</a>
+        </h2>
+    }
+    <h1 style="text-align:center">Cpu List</h1>
+    <div class="my-bg-dark">
+        <table id="myTable" class="table table-striped col-12">
+            <thead class="bg-primary">
+                <tr>
+                    <th class="all">
+                        <label>Name</label>
+                    </th>
+                    <th class="desktop">
+                        <label>Benchmark</label>
+                    </th>
+                    <th class="all">
+                        <label>Score</label>
+                    </th>
+                    <th class="desktop">
+                        <label>Price</label>
+                    </th>
+                    <th class="desktop">
+                        <label>Release Date</label>
+                    </th>
+                    @if (Model != null && Model?.Page != 0)
+                    {
+                        <th class="all"></th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        var pageNum = '@Model?.Page';
+        var table;
+        $(document).ready(function () {
+            if (pageNum == 0) {
+                table = $('#myTable').DataTable({
+                    responsive: true,
+                    ajax: '/Customer/Build/GetCpu',
+                    columns: [
+                        { 'data': 'name' },
+                        { 'data': 'benchmark' },
+                        { 'data': 'score' },
+                        { 'data': 'price' },
+                        { 'data': 'releaseDate' },
+                    ]
+                });
+            }
+            else {
+                table = $('#myTable').DataTable({
+                    responsive: true,
+                    ajax: '/Customer/Build/GetCpu',
+                    columns: [
+                        { 'data': 'name' },
+                        { 'data': 'benchmark' },
+                        { 'data': 'score' },
+                        { 'data': 'price' },
+                        { 'data': 'releaseDate' },
+                        {
+                            'data': 'id',
+                            'render': function (data) {
+                                return `
+                                <div style="float:right">
+                                    <a href="/Customer/Build/AddComponent/?cpuId=${data}&gpuId=@Model.GpuId&ramId=@Model.RamId&storageId=@Model.StorageId&page=@Model.Page" 
+                                        class="btn btn-primary">Add To Build</a>
+                                </div>`
+                            }
+                        }
+                    ]
+                });
+            }
+        });
+
+    </script>
+}

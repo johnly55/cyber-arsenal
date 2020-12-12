@@ -1,4 +1,5 @@
 ﻿@model Part
+@using CyberArsenal.Utilities;
 @{ 
     string upsert = "Create";
 }
@@ -21,7 +22,10 @@
                 <label asp-for="@Model.Type"></label>
                     @Html.DropDownListFor(u => u.Type, 
                     new SelectList(new string[] {
-                        "Cpu", "Gpu", "Ram", "Storage" 
+                        SD.TYPE_CPU,
+                        SD.TYPE_GPU,
+                        SD.TYPE_RAM,
+                        SD.TYPE_STORAGE
                     }),
                     "-Select component type", new { @class="form-control" })
             </div>
