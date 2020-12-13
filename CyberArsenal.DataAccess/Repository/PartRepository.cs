@@ -25,6 +25,7 @@ namespace CyberArsenal.DataAccess.Repository
                 obj.Score = part.Score;
                 obj.Price = part.Price;
                 obj.ReleaseDate = part.ReleaseDate;
+                obj.Reference = part.Reference;
             }
 
             _db.Update(obj);

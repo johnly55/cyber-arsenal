@@ -8,7 +8,8 @@ $(document).ready(function () {
             { 'data': 'cpuName' },
             { 'data': 'gpuName' },
             { 'data': 'ramName' },
-            { 'data': 'storageName' }
+            { 'data': 'storageName' },
+            { 'data': 'score' }
         ]
     });
 });

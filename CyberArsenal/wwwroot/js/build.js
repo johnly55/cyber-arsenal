@@ -13,6 +13,8 @@ $(document).ready(function () {
             { 'data': 'motherBoard' },
             { 'data': 'powerSupply' },
             { 'data': 'case' },
+            { 'data': 'score' },
+            { 'data': 'date' },
             {
                 'data': 'id',
                 'render': function (data) {

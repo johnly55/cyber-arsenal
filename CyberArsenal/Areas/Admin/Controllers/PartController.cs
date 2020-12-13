@@ -50,6 +50,18 @@ namespace CyberArsenal.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                //If part is a reference, if there is already a reference of this type, find it and make it false
+                if (part.Reference)
+                {
+                    var currentReference = _unitOfWork.Part.FirstOrDefault(u => u.Type == part.Type && u.Reference == true);
+                    
+                    if(currentReference != null)
+                    {
+                        currentReference.Reference = false;
+                        _unitOfWork.Part.Update(currentReference);
+                    }
+                }
+
                 if (part.Id != 0)
                 {
                     _unitOfWork.Part.Update(part);
@@ -66,21 +78,44 @@ namespace CyberArsenal.Areas.Admin.Controllers
             return View(part);
         }
 
-        public IActionResult Detail(int id)
+        [HttpGet]
+        public IActionResult MassAdd()
         {
-            Part obj;
-
-            obj = _unitOfWork.Part.Get(id);
-
-            if (obj == null)
-            {
-                return NotFound();
-            }
+            Part obj = new Part();
 
             return View(obj);
         }
 
-        public IActionResult Compare(int id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult MassAdd(Part part)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach(var name in part.Name.Split(new char[] { ';' }, System.StringSplitOptions.RemoveEmptyEntries))
+                {
+                    Part tempPart = new Part
+                    {
+                        Id = 0,
+                        Name = name,
+                        Benchmark = part.Benchmark,
+                        Type = part.Type,
+                        Reference = false,
+                        ReleaseDate = part.ReleaseDate,
+                        Price = part.Price,
+                        Score = part.Score
+                    };
+                    _unitOfWork.Part.Add(tempPart);
+                    _unitOfWork.Save();
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(part);
+        }
+
+        public IActionResult Detail(int id)
         {
             Part obj;
 

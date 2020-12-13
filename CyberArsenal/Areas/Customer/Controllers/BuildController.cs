@@ -111,6 +111,7 @@ namespace CyberArsenal.Areas.Customer.Controllers
                     build.Private = true;
                 }
                 //If the user picked a component before but now customized it, private it
+                //otherwise, score it
                 else
                 {
                     var cpu = _unitOfWork.Part.Get(build.CpuId.GetValueOrDefault());
@@ -128,6 +129,20 @@ namespace CyberArsenal.Areas.Customer.Controllers
                         build.GpuId = null;
                         build.RamId = null;
                         build.StorageId = null;
+                    }
+                    else
+                    {
+                        var referenceCpu = _unitOfWork.Part.FirstOrDefault(u => u.Reference == true && u.Type == SD.TYPE_CPU);
+                        var referenceGpu = _unitOfWork.Part.FirstOrDefault(u => u.Reference == true && u.Type == SD.TYPE_GPU);
+                        var referenceRam = _unitOfWork.Part.FirstOrDefault(u => u.Reference == true && u.Type == SD.TYPE_RAM);
+                        var referenceStorage = _unitOfWork.Part.FirstOrDefault(u => u.Reference == true && u.Type == SD.TYPE_STORAGE);
+
+                        double cpuScore = cpu.Score / (double)referenceCpu.Score * 100;
+                        double gpuScore = gpu.Score / (double)referenceGpu.Score * 100;
+                        double ramScore = ram.Score / (double)referenceRam.Score * 100;
+                        double storageScore = storage.Score / (double)referenceStorage.Score * 100;
+
+                        build.Score = (int)(cpuScore + gpuScore + ramScore + storageScore) / 4;
                     }
                 }
 

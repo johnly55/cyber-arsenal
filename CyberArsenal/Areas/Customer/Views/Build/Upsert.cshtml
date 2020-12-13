@@ -12,13 +12,14 @@
                 upsert = "Edit";
                 ViewData["Title"] = upsert;
             }
-        <div class="form-group">
-            <input class="form-control" asp-for="@Model.ApplicationUserId" type="hidden" />
-            <input class="form-control" asp-for="@Model.CpuId" type="hidden" />
-            <input class="form-control" asp-for="@Model.GpuId" type="hidden" />
-            <input class="form-control" asp-for="@Model.RamId" type="hidden" />
-            <input class="form-control" asp-for="@Model.StorageId" type="hidden" />
-        </div>
+            <div class="form-group">
+                <input class="form-control" asp-for="@Model.ApplicationUserId" type="hidden" />
+                <input class="form-control" asp-for="@Model.CpuId" type="hidden" />
+                <input class="form-control" asp-for="@Model.GpuId" type="hidden" />
+                <input class="form-control" asp-for="@Model.RamId" type="hidden" />
+                <input class="form-control" asp-for="@Model.StorageId" type="hidden" />
+                <input class="form-control" asp-for="@Model.Score" type="hidden" />
+            </div>
             <div class="form-group">
                 <label asp-for="@Model.Name"></label>
                 <input class="form-control" asp-for="@Model.Name" type="text" />
@@ -68,6 +69,11 @@
                 <label asp-for="@Model.Description"></label>
                 <textarea class="form-control" asp-for="@Model.Description"></textarea>
                 <span class="text-danger" asp-validation-for="@Model.Description"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Date"></label>
+                <input class="form-control" asp-for="@Model.Date" type="date" />
+                <span class="text-danger" asp-validation-for="@Model.Date"></span>
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Private"></label>

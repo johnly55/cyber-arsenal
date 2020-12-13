@@ -3,7 +3,10 @@
     ViewData["Title"] = "Parts";
 }
 <div style="margin:20px 30px">
-    <a style="float:left" class="btn btn-primary mt-1 mb-4" asp-action="Upsert"><i class="fas fa-plus-square"> Create a Part</i></a>
+    <div class="">
+        <a style="float:left" class="btn btn-primary mt-1 mb-4" asp-action="Upsert"><i class="fas fa-plus-square"> Create a Part</i></a>
+        <a style="float:left" class="btn btn-danger mt-1 mb-4" asp-action="MassAdd"><i class="fas fa-plus-square"> Mass Add</i></a>
+    </div>
     <h1 style="text-align:center">Parts List</h1>
     <div class="my-bg-dark">
         <table id="myTable" class="table table-striped col-12">
@@ -26,6 +29,9 @@
                     </th>
                     <th class="desktop">
                         <label asp-for="@Model.ReleaseDate"></label>
+                    </th>
+                    <th class="all">
+                        <label asp-for="@Model.Reference"></label>
                     </th>
                     <th class="none"></th>
                 </tr>

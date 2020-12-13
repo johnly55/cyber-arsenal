@@ -10,6 +10,7 @@ $(document).ready(function () {
             { 'data': 'score' },
             { 'data': 'price' },
             { 'data': 'releaseDate' },
+            { 'data': 'reference' },
             {
                 'data': 'id',
                 'render': function (data) {

@@ -28,8 +28,11 @@ namespace CyberArsenal.Models
         [Display(Name = "MSRP Price")]
         public double Price { get; set; }
 
-        [Required]
         [Display(Name = "Release Date")]
         public string ReleaseDate { get; set; }
+
+        [Required]
+        [Display(Name = "Reference")]
+        public bool Reference { get; set; }
     }
 }

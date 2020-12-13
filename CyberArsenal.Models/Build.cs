@@ -85,9 +85,7 @@ namespace CyberArsenal.Models
         public string Date { get; set; }
 
         [Required]
-        [Display(Name = "Make Private?")]
+        [Display(Name = "Private")]
         public bool Private { get; set; }
-
-        //prop Authorized
     }
 }

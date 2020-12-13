@@ -14,7 +14,8 @@
                 ViewData["Title"] = upsert;
             }
             <div class="form-group">
-                <label asp-for="@Model.Name"></label>
+                <label asp-for="@Model.Name">Component Names.
+                Names seperated by ';' For example: 1TB SSD;2TB SSD;256GB SSD</label>
                 <input class="form-control" asp-for="@Model.Name" type="text" />
                 <span class="text-danger" asp-validation-for="@Model.Name"></span>
             </div>
@@ -56,9 +57,7 @@
                 <span class="text-danger" asp-validation-for="@Model.ReleaseDate"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Reference"></label>
-                <input class="" asp-for="@Model.Reference" type="checkbox" />
-                <span class="text-danger" asp-validation-for="@Model.Reference"></span>
+                <input class="" asp-for="@Model.Reference" type="hidden" />
             </div>
             <div class="form-group row">
                 <partial name="_BackButtonPartial" />
