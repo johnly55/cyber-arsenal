@@ -1,4 +1,5 @@
 using CyberArsenal.DataAccess.Data;
+using CyberArsenal.DataAccess.Initializer;
 using CyberArsenal.DataAccess.Repository;
 using CyberArsenal.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Builder;
@@ -34,6 +35,7 @@ namespace CyberArsenal
                 .AddDefaultTokenProviders();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IDbInitializer, DbInitializer>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
@@ -53,7 +55,7 @@ namespace CyberArsenal
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitializer dbInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -73,6 +75,7 @@ namespace CyberArsenal
 
             app.UseAuthentication();
             app.UseAuthorization();
+            dbInitializer.Initialize();
 
             app.UseEndpoints(endpoints =>
             {

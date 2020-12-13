@@ -98,19 +98,6 @@ namespace CyberArsenal.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    if (! await _roleManager.RoleExistsAsync(SD.ROLE_ADMIN))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.ROLE_ADMIN));
-                    }
-                    if (!await _roleManager.RoleExistsAsync(SD.ROLE_MOD))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.ROLE_MOD));
-                    }
-                    if (!await _roleManager.RoleExistsAsync(SD.ROLE_CUSTOMER))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.ROLE_CUSTOMER));
-                    }
-
                     _logger.LogInformation("User created a new account with password.");
 
                     if (User.IsInRole(SD.ROLE_ADMIN) || User.IsInRole(SD.ROLE_MOD))

@@ -180,7 +180,6 @@ body {
     }
 
 .icon-container{
-    margin: auto auto;
     height: 170px;
     width: 100%;
     border: 10px solid var(--my-bg-orange);
@@ -228,17 +227,26 @@ body {
 
     .icon-container {
         height: calc(100vw / 3);
+        border: 5px solid var(--my-bg-orange);
     }
 
     .icon i{
         width: 90px;
-        height: 80px;
+        height: 70px;
     }
 
     #banner div {
         width: 70%;
         left: 15vw;
         top: 40%;
+    }
+
+    #banner h1 {
+        font-size: 25px;
+    }
+
+    #logo {
+        background-size: 100px 100px;
     }
 }
 
