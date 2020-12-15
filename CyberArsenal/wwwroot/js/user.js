@@ -42,6 +42,8 @@ $(document).ready(function () {
     });
 });
 
+//Delays 0.5 seconds before reloading table
+var delay = 500;
 function LockUnlock(id) {
     console.log(id);
     Swal.fire({
@@ -58,7 +60,9 @@ function LockUnlock(id) {
                 data: { id: id },
                 success: function (data) {
                     if (data.success) {
-                        table.ajax.reload();
+                        setTimeout(function () {
+                            table.ajax.reload();
+                        }, delay)
                     }
                     else {
                         Swal.fire(
