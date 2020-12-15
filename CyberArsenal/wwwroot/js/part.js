@@ -62,3 +62,28 @@ function Delete(id) {
         }
     })
 }
+
+function UpdateScores() {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'This might take some time.',
+        icon: 'question',
+        showDenyButton: true,
+        confirmButtonText: `Score`,
+        denyButtonText: `Cancel`,
+    }).then(result => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "/Admin/Part/UpdateScores",
+                success: function (data) {
+                    table.ajax.reload();
+                    Swal.fire(
+                        'Finished!',
+                        'Components have been re-scored.',
+                        'success'
+                    )
+                }
+            });
+        }
+    })
+}

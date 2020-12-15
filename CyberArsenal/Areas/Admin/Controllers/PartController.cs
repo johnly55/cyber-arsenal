@@ -4,6 +4,8 @@ using CyberArsenal.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CyberArsenal.Areas.Admin.Controllers
 {
@@ -188,6 +190,66 @@ namespace CyberArsenal.Areas.Admin.Controllers
         }
 
         #region API CALLS
+
+        //Grabs the reference of each component type and update non-reference scores
+        public IActionResult UpdateScores()
+        {
+            var cpuReference = _unitOfWork.Part.FirstOrDefault(u => u.Type == SD.TYPE_CPU && u.Reference == true);
+            var gpuReference = _unitOfWork.Part.FirstOrDefault(u => u.Type == SD.TYPE_GPU && u.Reference == true);
+            var ramReference = _unitOfWork.Part.FirstOrDefault(u => u.Type == SD.TYPE_RAM && u.Reference == true);
+            var storageReference = _unitOfWork.Part.FirstOrDefault(u => u.Type == SD.TYPE_STORAGE && u.Reference == true);
+
+            var cpuList = _unitOfWork.Part.GetAll(u => u.Type == SD.TYPE_CPU && u.Reference == false);
+            var gpuList = _unitOfWork.Part.GetAll(u => u.Type == SD.TYPE_GPU && u.Reference == false);
+            var ramList= _unitOfWork.Part.GetAll(u => u.Type == SD.TYPE_RAM && u.Reference == false);
+            var storageList= _unitOfWork.Part.GetAll(u => u.Type == SD.TYPE_STORAGE && u.Reference == false);
+
+
+
+            var referenceList = new Part[] { cpuReference, gpuReference, ramReference, storageReference };
+            var componentList = new Part[][] { 
+                cpuList.Count() > 0 ? cpuList.ToArray() : null,
+                gpuList.Count() > 0 ? gpuList.ToArray() : null,
+                ramList.Count() > 0 ? ramList.ToArray() : null,
+                storageList.Count() > 0 ? storageList.ToArray() : null
+            };
+
+            for (int i = 0; i < referenceList.Length; i++)
+            {
+                if(referenceList[i] != null && componentList[i] != null)
+                {
+                    var reference = referenceList[i];
+                    for (int j = 0; j < componentList[i].Length; j++)
+                    {
+                        var part = componentList[i][j];
+
+                        //Logic for scoring
+                        //Zero exceptions since we divide
+                        if (reference.BenchmarkPoints == 0)
+                        {
+                            reference.BenchmarkPoints = 1;
+                        }
+                        if (part.BenchmarkPoints == 0)
+                        {
+                            part.BenchmarkPoints = 1;
+                        }
+
+                        int score = (part.BenchmarkPoints * 100) / reference.BenchmarkPoints;
+                        //Set a cap in case of weird numbers
+                        if (score > 150)
+                        {
+                            score = 150;
+                        }
+
+                        part.Score = score;
+
+                        _unitOfWork.Part.Update(part);
+                        _unitOfWork.Save();
+                    }
+                }
+            }
+            return Json(new { success = true });
+        }
 
         public IActionResult GetAll(int partType)
         {

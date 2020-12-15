@@ -179,20 +179,6 @@ namespace CyberArsenal.Areas.Customer.Controllers
             return View(obj);
         }
 
-        public IActionResult Compare(int id)
-        {
-            Build obj;
-
-            obj = _unitOfWork.Build.Get(id);
-
-            if (obj == null)
-            {
-                return NotFound();
-            }
-
-            return View(obj);
-        }
-
         public IActionResult Cpu(BuildViewModel buildViewModel)
         {
             return View(buildViewModel);
