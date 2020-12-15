@@ -7,6 +7,7 @@ $(document).ready(function () {
             { 'data': 'type' },
             { 'data': 'name' },
             { 'data': 'benchmark' },
+            { 'data': 'benchmarkPoints' },
             { 'data': 'score' },
             { 'data': 'price' },
             { 'data': 'releaseDate' },

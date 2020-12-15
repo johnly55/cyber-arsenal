@@ -22,6 +22,7 @@ namespace CyberArsenal.DataAccess.Repository
                 obj.Type = part.Type;
                 obj.Name = part.Name;
                 obj.Benchmark = part.Benchmark;
+                obj.BenchmarkPoints = part.BenchmarkPoints;
                 obj.Score = part.Score;
                 obj.Price = part.Price;
                 obj.ReleaseDate = part.ReleaseDate;

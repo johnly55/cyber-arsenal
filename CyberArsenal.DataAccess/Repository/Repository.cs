@@ -37,7 +37,7 @@ namespace CyberArsenal.DataAccess.Repository
             {
                 foreach (string prop in properties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    query.Include(prop);
+                    query = query.Include(prop);
                 }
             }
 

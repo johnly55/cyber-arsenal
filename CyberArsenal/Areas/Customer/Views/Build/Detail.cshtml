@@ -2,7 +2,93 @@
 @{
     ViewData["Title"] = "Details";
 }
-<div class="p-4 bg-dark col-6" style="margin: auto auto">
+
+
+<div class="p-4 my-bg-dark page-forms">
+    @if (Model.Score > 0)
+    {
+        <div style="width:100%;display:table">
+            <div style="display:table-cell;width:30%;">
+                <i class="fas fa-desktop fa-10x"></i>
+                <h2>Your Score</h2>
+            </div>
+            <div class="fire-text" style="display:table-cell;width:70%;">
+                <div style="margin:auto auto;text-align:center">
+
+                    @if (Model.Score > 100)
+                    {
+                        <div style="display:block">
+                            <img style="height:50px;width:50px;" src="~/images/fire.gif" />
+                            <img style="height:50px;width:50px;" src="~/images/fire.gif" />
+                        </div>
+                        <div style="display:block">
+                            <h1>Battle Station!</h1>
+                        </div>
+                    }
+                    else if (Model.Score >= 80)
+                    {
+                        <div style="display:block">
+                            <img style="height:50px;width:50px;" src="~/images/fire.gif" />
+                        </div>
+                        <div style="display:block">
+                            <h1>Gaming Desktop</h1>
+                        </div>
+                    }
+                    else if (Model.Score >= 60)
+                    {
+                        <div style="display:block">
+                            <h1>Gaming Laptop</h1>
+                        </div>
+                    }
+                    else
+                    {
+                        <div style="display:block">
+                            <h1>Casual</h1>
+                        </div>
+                    }
+
+                    <div style="display:block">
+                        <h1>Score: @Model.Score%</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="text-progress-bars">
+            <div>
+                Processor: @Model.CpuName
+                <div id="progress-bar-cpu" class="progress" style="width:70%">
+                    <div class="progress-bar" style="width:0%"></div>
+                </div>
+            </div>
+            <div>
+                Graphics Card: @Model.GpuName
+                <div id="progress-bar-gpu" class="progress" style="width:70%">
+                    <div class="progress-bar" style="width:0%"></div>
+                </div>
+            </div>
+            <div>
+                Memory: @Model.RamName
+                <div id="progress-bar-ram" class="progress" style="width:70%">
+                    <div class="progress-bar" style="width:0%"></div>
+                </div>
+            </div>
+            <div>
+                Storage: @Model.StorageName
+                <div id="progress-bar-storage" class="progress" style="width:70%">
+                    <div class="progress-bar" style="width:0%"></div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h1>No scores given to custom Builds</h1>
+    }
+</div>
+
+<div class="p-4 my-bg-dark page-forms">
+    <h1 class="text-white text-center">Details</h1>
+
     <div class="form-group">
         <input asp-for="@Model.Id" type="hidden" />
     </div>
@@ -48,14 +134,28 @@
         <textarea class="form-control" asp-for="@Model.Description" disabled></textarea>
     </div>
     <div class="form-group">
-        <label asp-for="@Model.Private"></label>
-        <input class="" asp-for="@Model.Private" type="checkbox" disabled />
+        <label asp-for="@Model.Score">Score %</label>
+        @Model.Score
     </div>
     <div class="form-group">
-        <label asp-for="@Model.Score">Score %</label>
-        <input class="" asp-for="@Model.Score" type="text" disabled />
+        <label asp-for="@Model.Private"></label>
+        <input class="" asp-for="@Model.Private" type="checkbox" disabled />
     </div>
     <div>
         <partial name="_BackAndEditAndDeleteButtonsPartial" model="Model.Id" />
     </div>
 </div>
+
+@section Scripts
+{
+    <script>
+
+        $(document).ready(function () {
+            if (@Model.Score > 0) {
+                fillProgress(@Model.Cpu?.Score, @Model.Gpu?.Score, @Model.Ram?.Score, @Model.Storage?.Score);
+            }
+        });
+
+    </script>
+    <script src="~/js/details.js"></script>
+}

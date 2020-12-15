@@ -21,12 +21,14 @@ namespace CyberArsenal.Models
         [Display(Name = "Benchmark Type")]
         public string Benchmark { get; set; }
 
-        [Display(Name = "Benchmark Score")]
+        [Display(Name = "Benchmark Points")]
+        public int BenchmarkPoints { get; set; }
+
+        [Display(Name = "Score")]
         public int Score { get; set; }
 
-        [Required]
-        [Display(Name = "MSRP Price")]
-        public double Price { get; set; }
+        [Display(Name = "Price")]
+        public double? Price { get; set; }
 
         [Display(Name = "Release Date")]
         public string ReleaseDate { get; set; }

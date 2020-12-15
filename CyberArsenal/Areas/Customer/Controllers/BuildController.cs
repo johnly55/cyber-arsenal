@@ -109,6 +109,11 @@ namespace CyberArsenal.Areas.Customer.Controllers
                     build.StorageId == 0 || build.StorageId == null)
                 {
                     build.Private = true;
+
+                    build.CpuId = null;
+                    build.GpuId = null;
+                    build.RamId = null;
+                    build.StorageId = null;
                 }
                 //If the user picked a component before but now customized it, private it
                 //otherwise, score it
@@ -129,20 +134,12 @@ namespace CyberArsenal.Areas.Customer.Controllers
                         build.GpuId = null;
                         build.RamId = null;
                         build.StorageId = null;
+                        build.Score = 0;
                     }
                     else
                     {
-                        var referenceCpu = _unitOfWork.Part.FirstOrDefault(u => u.Reference == true && u.Type == SD.TYPE_CPU);
-                        var referenceGpu = _unitOfWork.Part.FirstOrDefault(u => u.Reference == true && u.Type == SD.TYPE_GPU);
-                        var referenceRam = _unitOfWork.Part.FirstOrDefault(u => u.Reference == true && u.Type == SD.TYPE_RAM);
-                        var referenceStorage = _unitOfWork.Part.FirstOrDefault(u => u.Reference == true && u.Type == SD.TYPE_STORAGE);
-
-                        double cpuScore = cpu.Score / (double)referenceCpu.Score * 100;
-                        double gpuScore = gpu.Score / (double)referenceGpu.Score * 100;
-                        double ramScore = ram.Score / (double)referenceRam.Score * 100;
-                        double storageScore = storage.Score / (double)referenceStorage.Score * 100;
-
-                        build.Score = (int)(cpuScore + gpuScore + ramScore + storageScore) / 4;
+                        build.Score = (int)(cpu.Score + gpu.Score + 
+                            ram.Score + storage.Score) / 4;
                     }
                 }
 
@@ -156,7 +153,7 @@ namespace CyberArsenal.Areas.Customer.Controllers
                 }
                 _unitOfWork.Save();
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Detail), new { id = build.Id });
             }
 
             return View(build);
@@ -166,11 +163,17 @@ namespace CyberArsenal.Areas.Customer.Controllers
         {
             Build obj;
 
-            obj = _unitOfWork.Build.Get(id);
+            obj = _unitOfWork.Build.FirstOrDefault(u => u.Id == id, "Cpu,Gpu,Ram,Storage");
 
             if (obj == null)
             {
                 return NotFound();
+            }
+
+            //If user besides creator tries to see details, redirect
+            if (obj.ApplicationUserId != _userManager.GetUserId(User))
+            {
+                return RedirectToAction(nameof(Index));
             }
 
             return View(obj);

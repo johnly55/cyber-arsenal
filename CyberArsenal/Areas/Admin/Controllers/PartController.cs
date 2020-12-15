@@ -50,15 +50,51 @@ namespace CyberArsenal.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                //If part is a reference, if there is already a reference of this type, find it and make it false
-                if (part.Reference)
+                var currentReference = _unitOfWork.Part.FirstOrDefault(u => u.Type == part.Type && u.Reference == true);
+
+                //If there is no reference, this is now the reference
+                if (currentReference == null)
                 {
-                    var currentReference = _unitOfWork.Part.FirstOrDefault(u => u.Type == part.Type && u.Reference == true);
-                    
-                    if(currentReference != null)
+                    part.Reference = true;
+                    part.Score = 100;
+                }
+                //If score wasn't already 100 it is now
+                else if(currentReference.Id == part.Id)
+                {
+                    part.Score = 100;
+                }
+                //Skip logic if this part is the current reference
+                else if (currentReference.Id != part.Id)
+                {
+                    //If part is a reference, if there is already a reference of this type, find it and make it false
+                    if (part.Reference)
                     {
                         currentReference.Reference = false;
                         _unitOfWork.Part.Update(currentReference);
+                        _unitOfWork.Save();
+
+                        part.Score = 100;
+                    }
+                    //Otherwise just score the part based off the reference
+                    else
+                    {
+                        //Zero exceptions since we divide
+                        if (currentReference.BenchmarkPoints == 0)
+                        {
+                            currentReference.BenchmarkPoints = 1;
+                        }
+                        if (part.BenchmarkPoints == 0)
+                        {
+                            part.BenchmarkPoints = 1;
+                        }
+
+                        int score = (part.BenchmarkPoints * 100 )/ currentReference.BenchmarkPoints;
+                        //Set a cap in case of weird numbers
+                        if (score > 150)
+                        {
+                            score = 150;
+                        }
+                        part.Score = score;
                     }
                 }
 
@@ -92,19 +128,41 @@ namespace CyberArsenal.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                foreach(var name in part.Name.Split(new char[] { ';' }, System.StringSplitOptions.RemoveEmptyEntries))
+                var currentReference = _unitOfWork.Part.FirstOrDefault(u => u.Type == part.Type && u.Reference == true);
+
+                foreach (var name in part.Name.Split(new char[] { ';' }, System.StringSplitOptions.RemoveEmptyEntries))
                 {
                     Part tempPart = new Part
                     {
                         Id = 0,
                         Name = name,
                         Benchmark = part.Benchmark,
+                        BenchmarkPoints = part.BenchmarkPoints,
                         Type = part.Type,
                         Reference = false,
                         ReleaseDate = part.ReleaseDate,
                         Price = part.Price,
-                        Score = part.Score
                     };
+
+                    //Logic for scoring
+                    //Zero exceptions since we divide
+                    if (currentReference.BenchmarkPoints == 0)
+                    {
+                        currentReference.BenchmarkPoints = 1;
+                    }
+                    if (tempPart.BenchmarkPoints == 0)
+                    {
+                        tempPart.BenchmarkPoints = 1;
+                    }
+
+                    int score = (tempPart.BenchmarkPoints * 100) / currentReference.BenchmarkPoints;
+                    //Set a cap in case of weird numbers
+                    if (score > 150)
+                    {
+                        score = 150;
+                    }
+                    tempPart.Score = score;
+
                     _unitOfWork.Part.Add(tempPart);
                     _unitOfWork.Save();
                 }

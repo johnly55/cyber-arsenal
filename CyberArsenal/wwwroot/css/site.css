@@ -3,6 +3,8 @@ for details on configuring this project to bundle and minify static web assets. 
 :root {
     --my-bg-dark: #2f475e;
     --my-bg-orange: #ff751a;
+    --my-bg-green: #5cb85c;
+    --my-bg-blue: #5bc0de;
 }
 
 a.navbar-brand {
@@ -84,11 +86,19 @@ body {
 }
 
 .my-bg-dark{
-    background-color: var(--my-bg-dark);
+    background-color: var(--my-bg-dark) !important;
 }
 
 .my-bg-orange{
-    background-color: var(--my-bg-orange);
+    background-color: var(--my-bg-orange) !important;
+}
+
+.my-bg-green {
+    background-color: var(--my-bg-green) !important;
+}
+
+.my-bg-blue {
+    background-color: var(--my-bg-blue) !important;
 }
 
 .orange-border {
@@ -179,7 +189,21 @@ body {
         text-align: center;
     }
 
-.icon-container{
+.page-forms {
+    margin:40px auto;
+    border:1px white solid;
+    width:45%;
+}
+
+#text-progress-bars{
+    margin: 50px auto 10px;
+}
+
+    #text-progress-bars > div {
+        padding: 20px 0px;
+    }
+
+.icon-container {
     height: 170px;
     width: 100%;
     border: 10px solid var(--my-bg-orange);
@@ -187,7 +211,7 @@ body {
     margin: 10px auto;
     text-align: center;
     display: flex;
-    justify-content:space-evenly;
+    justify-content: space-evenly;
 }
 
 .icon {
@@ -213,6 +237,29 @@ body {
     height: 50px;
     width: 50px;
     float: left;
+    display: inline-block;
+}
+
+.footer-icons-container {
+    position: relative;
+}
+
+.footer-icon-linkedin {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 0px;
+    left: 50vw;
+    padding: 5px 5px;
+}
+
+.footer-icon-github {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 0px;
+    left: calc(50vw - 80px);
+    padding: 5px 5px;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -245,8 +292,29 @@ body {
         font-size: 25px;
     }
 
+    .page-forms {
+        width: 90%;
+    }
+
     #logo {
         background-size: 100px 100px;
+    }
+
+    .fire img{
+        display: none;
+    }
+
+    .fire-text {
+        text-align: center;
+        float: none;
+    }
+
+    .footer-icon-linkedin {
+        left: 55vw;
+    }
+
+    .footer-icon-github {
+        left: calc(55vw - 80px);
     }
 }
 
@@ -268,4 +336,13 @@ body {
 
 table.dataTable tbody tr{
     background-color: var(--my-bg-dark);
+}
+
+.progress-bar {
+    transition: width ease-out 3s !important;
+    background-color: #d9534f;
+}
+
+.progress {
+    transition: width ease-out 1.5s !important;
 }

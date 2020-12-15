@@ -108,15 +108,7 @@ namespace CyberArsenal.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        if (_userManager.Users.Count() == 1)
-                        {
-                            await _userManager.AddToRoleAsync(user, SD.ROLE_ADMIN);
-                            _logger.LogInformation($"User: {user.UserName}'s Role Assigned as Admin");
-                        }
-                        else
-                        {
-                            await _userManager.AddToRoleAsync(user, SD.ROLE_CUSTOMER);
-                        }
+                        await _userManager.AddToRoleAsync(user, SD.ROLE_CUSTOMER);
                     }
 
                     /*

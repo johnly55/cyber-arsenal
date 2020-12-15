@@ -2,33 +2,39 @@
 @{
     ViewData["Title"] = "Details";
 }
-<div class="p-4 bg-dark col-6" style="margin:auto auto">
+<div class="p-4 my-bg-dark page-forms">
+    <h1 class="text-white text-center">Details</h1>
+
     <div class="form-group">
         <input asp-for="@Model.Id" type="hidden" />
     </div>
     <div class="form-group">
         <label asp-for="@Model.Name"></label>
-        <input class="form-control" asp-for="@Model.Name" type="text" disabled/>
+        <input class="form-control" asp-for="@Model.Name" type="text" disabled />
     </div>
     <div class="form-group">
         <label asp-for="@Model.Type"></label>
-        <input class="form-control" asp-for="@Model.Type" type="text" disabled/>
+        <input class="form-control" asp-for="@Model.Type" type="text" disabled />
     </div>
     <div class="form-group">
         <label asp-for="@Model.Benchmark"></label>
-        <input class="form-control" asp-for="@Model.Benchmark" type="text" disabled/>
+        <input class="form-control" asp-for="@Model.Benchmark" type="text" disabled />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.BenchmarkPoints"></label>
+        <input class="form-control" asp-for="@Model.BenchmarkPoints" type="number" disabled />
     </div>
     <div class="form-group">
         <label asp-for="@Model.Score"></label>
-        <input class="form-control" asp-for="@Model.Score" type="number" disabled/>
+        <input class="form-control" asp-for="@Model.Score" type="number" disabled />
     </div>
     <div class="form-group">
         <label asp-for="@Model.Price"></label>
-        <input class="form-control" asp-for="@Model.Price" type="number" disabled/>
+        <input class="form-control" asp-for="@Model.Price" type="number" disabled />
     </div>
     <div class="form-group">
         <label asp-for="@Model.ReleaseDate"></label>
-        <input class="form-control" asp-for="@Model.ReleaseDate" type="datetime" disabled/>
+        <input class="form-control" asp-for="@Model.ReleaseDate" type="datetime" disabled />
     </div>
     <div>
         <partial name="_BackAndEditAndDeleteButtonsPartial" model="Model.Id" />
