@@ -48,7 +48,8 @@ namespace CyberArsenal.DataAccess.Initializer
             {
                 UserName = "Admin_John",
                 Email = "john.ly@outlook.com",
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                LockoutEnabled = false
             }, "LJU7eVFRk9k9uVP@").GetAwaiter().GetResult();
 
             ApplicationUser user = _db.ApplicationUsers.Where(u => u.Email == "john.ly@outlook.com").FirstOrDefault();

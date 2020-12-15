@@ -12,11 +12,14 @@ namespace CyberArsenal.DataAccess.Repository
             _db = db;
             Build = new BuildRepository(db);
             Part = new PartRepository(db);
+            User = new ApplicationUserRepository(db);
         }
 
         public IBuildRepository Build { get; private set; }
 
         public IPartRepository Part{ get; private set; }
+
+        public IApplicationUserRepository User { get; private set; }
 
         public void Dispose()
         {

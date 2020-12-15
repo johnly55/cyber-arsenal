@@ -1,0 +1,35 @@
+﻿@model ApplicationUser
+@{
+    ViewData["Title"] = "Parts";
+}
+<div style="margin:20px 30px">
+    <h1 style="text-align:center">User List</h1>
+    <div class="my-bg-dark">
+        <table id="myTable" class="table table-striped col-12">
+            <thead class="bg-primary">
+                <tr>
+                    <th class="all">
+                        <label asp-for="@Model.UserName"></label>
+                    </th>
+                    <th class="desktop">
+                        <label asp-for="@Model.Email"></label>
+                    </th>
+                    <th class="desktop">
+                        <label asp-for="@Model.LockoutEnabled"></label>
+                    </th>
+                    <th class="desktop">
+                        <label asp-for="@Model.LockoutEnd"></label>
+                    </th>
+                    <th class="desktop"></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/user.js"></script>
+}

@@ -13,6 +13,8 @@ namespace CyberArsenal.DataAccess.Repository.IRepository
 
         public IPartRepository Part { get; }
 
+        public IApplicationUserRepository User { get; }
+
         public void Save();
     }
 }
