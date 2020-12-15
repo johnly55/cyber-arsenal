@@ -92,9 +92,9 @@ namespace CyberArsenal.Areas.Admin.Controllers
 
                         int score = (part.BenchmarkPoints * 100 )/ currentReference.BenchmarkPoints;
                         //Set a cap in case of weird numbers
-                        if (score > 150)
+                        if (score > 300)
                         {
-                            score = 150;
+                            score = 300;
                         }
                         part.Score = score;
                     }
@@ -159,9 +159,9 @@ namespace CyberArsenal.Areas.Admin.Controllers
 
                     int score = (tempPart.BenchmarkPoints * 100) / currentReference.BenchmarkPoints;
                     //Set a cap in case of weird numbers
-                    if (score > 150)
+                    if (score > 300)
                     {
-                        score = 150;
+                        score = 300;
                     }
                     tempPart.Score = score;
 
@@ -236,9 +236,9 @@ namespace CyberArsenal.Areas.Admin.Controllers
 
                         int score = (part.BenchmarkPoints * 100) / reference.BenchmarkPoints;
                         //Set a cap in case of weird numbers
-                        if (score > 150)
+                        if (score > 300)
                         {
-                            score = 150;
+                            score = 300;
                         }
 
                         part.Score = score;
