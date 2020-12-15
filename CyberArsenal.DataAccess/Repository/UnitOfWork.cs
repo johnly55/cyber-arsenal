@@ -1,5 +1,6 @@
 ﻿using CyberArsenal.DataAccess.Data;
 using CyberArsenal.DataAccess.Repository.IRepository;
+using System.Threading.Tasks;
 
 namespace CyberArsenal.DataAccess.Repository
 {
@@ -29,6 +30,11 @@ namespace CyberArsenal.DataAccess.Repository
         public void Save()
         {
             _db.SaveChanges();
+        }
+
+        public async Task SaveAsync()
+        {
+            await _db.SaveChangesAsync();
         }
     }
 }

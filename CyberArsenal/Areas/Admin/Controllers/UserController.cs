@@ -57,7 +57,7 @@ namespace CyberArsenal.Areas.Admin.Controllers
             }
 
             await _userManager.UpdateAsync(user);
-            _unitOfWork.Save();
+            await _unitOfWork.SaveAsync();
 
             return Json(new { success = true });
         }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CyberArsenal.DataAccess.Repository.IRepository
 {
@@ -16,5 +17,7 @@ namespace CyberArsenal.DataAccess.Repository.IRepository
         public IApplicationUserRepository User { get; }
 
         public void Save();
+
+        public Task SaveAsync();
     }
 }
